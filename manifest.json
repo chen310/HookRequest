@@ -1,21 +1,21 @@
 {
     "manifest_version": 1,
-    "name": "HookRequest", 
-    "slug": "HookRequest", 
+    "name": "HookRequest",
+    "slug": "HookRequest",
     "version": "0.0.1",
-    "author": "chen310", 
+    "author": "chen310",
     "description": "HookRequest",
     "betterncm_version": ">=1.0.0",
     "injects": {
-        "Main": [ 
+        "Main": [
             {
                 "file": "main.js"
             }
         ]
     },
     "hijacks": {
-        ">= 2.10.6 <= 2.10.8":{
-            "orpheus://orpheus/pub/core":{
+        ">= 2.10.6 <= 2.10.8": {
+            "orpheus://orpheus/pub/core": {
                 "type": "replace",
                 "from": "\"json\"===t.type&&(n=n||{}",
                 "to": "\"json\"===t.type&&(n=n||{},window.hookRequestAfter&&window.hookRequestAfter(e,n)"

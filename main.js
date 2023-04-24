@@ -14,13 +14,13 @@ window.hookRequestAfter = function (path, response) {
             return unblockLocalVIP(response);
         }
     }
-	else if (path.includes("/vipauth/app/auth/query")) {
-		return unblockLyricsEffects(response);
-	}
+    else if (path.includes("/vipauth/app/auth/query")) {
+        return unblockLyricsEffects(response);
+    }
 };
 
 const unblockLocalVIP = (obj) => {
-	console.log('unblockLocalVIP() has been triggered.');
+    console.log('unblockLocalVIP() has been triggered.');
     let info = obj['/api/music-vip-membership/client/vip/info'];
     if (info && ENABLE_LOCAL_VIP) {
         const defaultPackage = {
@@ -53,7 +53,7 @@ const unblockLocalVIP = (obj) => {
             expireTime,
         };
 
-        if (ENABLE_LOCAL_SVIP){
+        if (ENABLE_LOCAL_SVIP) {
             info.data.redplus = {
                 ...defaultPackage,
                 ...info.data.redplus,
@@ -70,18 +70,18 @@ const unblockLocalVIP = (obj) => {
                 expireTime,
             };
         }
-        
+
     }
     obj['/api/music-vip-membership/client/vip/info'] = info;
 };
 
 const unblockLyricsEffects = (obj) => {
-	console.log('unblockLyricsEffects() has been triggered.');
-	const { data, code } = obj;
-	if (code === 200 && Array.isArray(data)) {
-		data.forEach((item) => {
-			if ('canUse' in item) item.canUse = true;
-			if ('canNotUseReasonCode' in item) item.canNotUseReasonCode = 200;
-		});
-	}
+    console.log('unblockLyricsEffects() has been triggered.');
+    const { data, code } = obj;
+    if (code === 200 && Array.isArray(data)) {
+        data.forEach((item) => {
+            if ('canUse' in item) item.canUse = true;
+            if ('canNotUseReasonCode' in item) item.canNotUseReasonCode = 200;
+        });
+    }
 };
